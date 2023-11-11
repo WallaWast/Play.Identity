@@ -3,6 +3,9 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <UserSecretsId>c31b4138-aad5-4ee4-b74a-fc08b9645788</UserSecretsId>
+    <PackageDescription>Play Economy Identity microservice.</PackageDescription>
+    <Authors>Wallace Torres</Authors>
+    <Company>WallaWast</Company>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +14,7 @@
     <PackageReference Include="Duende.IdentityServer.AspNetIdentity" Version="6.2.3" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.Ui" Version="7.0.0" />
     <PackageReference Include="Microsoft.Visualstudio.Web.Codegeneration.Design" Version="7.0.0" />
-    <PackageReference Include="Play.Common" Version="1.0.4" />
+    <PackageReference Include="Play.Common" Version="1.0.7" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
