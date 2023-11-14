@@ -49,13 +49,12 @@ namespace Play.Identity.Service
                         serviceSettings.ServiceName
                     );
 
-            services.AddMassTransitWithRabbitMq(retryConfigurator =>
+            services.AddMassTransitWithMessageBroker(Configuration, retryConfigurator =>
             {
                 retryConfigurator.Interval(3, TimeSpan.FromSeconds(5));
                 retryConfigurator.Ignore(typeof(UnknowUserException));
                 retryConfigurator.Ignore(typeof(InsufficientFundsException));
-            }
-            );
+            });
 
             services.AddIdentityServer(options =>
                     {
