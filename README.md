@@ -17,6 +17,7 @@ dotnet nuget push ..\packages\Play.Identity.Contracts.$version.nupkg --api-key $
 $env:GH_OWNER="WallaWast"
 $env:GH_PAT="[PAT HERE]"
 $appname="waplayeconomy"
+$resourcegroup="playeconomy"
 docker build --secret id=GH_OWNER --secret id=GH_PAT -t "$appname.azurecr.io/play.identity:$version" .
 ```
 
@@ -48,4 +49,18 @@ kubectl create secret generic identity-secrets --from-literal=cosmosdb-connectio
 ## Create the Kubernetes pod
 ```powershell
 kubectl apply -f .\kubernetes\identity.yaml -n $namespace
+```
+
+## Creating the Azure Managed Identity and granting it access to Key Vault secrets
+```powershell
+az identity create --resource-group $resourcegroup --name $namespace
+$IDENTITY_CLIENT_ID=az identity show -g $resourcegroup -n $namespace --query clientId -otsv
+az keyvault set-policy -n $appname --secret-permissions get list --spn $IDENTITY_CLIENT_ID
+```
+
+## Estabilish the federated identity credential
+```powershell
+$AKS_OIDC_ISSUER=az aks show -n $appname -g $resourcegroup --query "oidcIssuerProfile.issuerUrl" -otsv
+
+az identity federated-credential create --name $namespace --identity-name $namespace --resource-group $resourcegroup --issuer $AKS_OIDC_ISSUER --subject "system:serviceaccount:${namespace}:${namespace}-serviceaccount"
 ```
