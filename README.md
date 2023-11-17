@@ -3,7 +3,7 @@ Play Economy Identity microservice
 
 ## Create and publish package
 ```powershell
-$version="1.0.7"
+$version="1.0.8"
 $owner="WallaWast"
 $gh_pat="[PAT HERE]"
 
@@ -48,7 +48,7 @@ kubectl apply -f .\kubernetes\identity.yaml -n $namespace
 
 To check the pods running
 ```powershell
- kubectl get pods -n $namespace
+kubectl get pods -n $namespace
 ```
 
 ## Check the service IP and infos
