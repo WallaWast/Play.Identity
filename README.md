@@ -41,14 +41,19 @@ $namespace="identity"
 kubectl create namespace $namespace
 ```
 
-## Create the Kubernetes secrets
-```powershell
-kubectl create secret generic identity-secrets --from-literal=cosmosdb-connectionstring=$cosmosDbConnString --from-literal=servicebus-connectionstring=$serviceBusConnString --from-literal=admin-password=$adminPass -n $namespace
-```
-
 ## Create the Kubernetes pod
 ```powershell
 kubectl apply -f .\kubernetes\identity.yaml -n $namespace
+```
+
+To check the pods running
+```powershell
+ kubectl get pods -n $namespace
+```
+
+## Check the service IP and infos
+```powershell
+kubectl get services -n $namespace
 ```
 
 ## Creating the Azure Managed Identity and granting it access to Key Vault secrets
