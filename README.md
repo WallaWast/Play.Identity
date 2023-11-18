@@ -70,3 +70,8 @@ $AKS_OIDC_ISSUER=az aks show -n $appname -g $resourcegroup --query "oidcIssuerPr
 
 az identity federated-credential create --name $namespace --identity-name $namespace --resource-group $resourcegroup --issuer $AKS_OIDC_ISSUER --subject "system:serviceaccount:${namespace}:${namespace}-serviceaccount"
 ```
+
+## Create the Signing certificate
+```powershell
+kubectl apply -f .\kubernetes\signing-cer.yaml -n $namespace
+```
