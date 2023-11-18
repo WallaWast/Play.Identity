@@ -15,7 +15,7 @@ spec:
       serviceAccountName: identity-serviceaccount
       containers:
         - name: identity
-          image: waplayeconomy.azurecr.io/play.identity:1.0.9
+          image: waplayeconomy.azurecr.io/play.identity:1.0.10
           env:
             - name: ServiceSettings__MessageBroker
               value: SERVICEBUS
