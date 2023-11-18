@@ -8,6 +8,10 @@ namespace Play.Identity.Service.Settings
 
         public decimal StartingGil { get; init; }
 
-        public string PathBase { get; set; }
+        public string PathBase { get; init; }
+
+        public string CertificateCerFilePath { get; init; }
+
+        public string CertificateKeyFilePath { get; init; }
     }
 }

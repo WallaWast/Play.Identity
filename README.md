@@ -4,7 +4,7 @@ Play Economy Identity microservice
 ## Create and publish package
 Don't forget to change the version into the kubernetes\identity.yaml
 ```powershell
-$version="1.0.10"
+$version="1.0.11"
 $owner="WallaWast"
 $gh_pat="[PAT HERE]"
 
