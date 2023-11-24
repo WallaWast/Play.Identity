@@ -5,7 +5,7 @@ Play Economy Identity microservice
 Don't forget to change the version into the kubernetes\identity.yaml
 ```powershell
 $version="1.0.11"
-$owner="WallaWast"
+$owner="wallawastoo"
 $gh_pat="[PAT HERE]"
 
 dotnet pack src\Play.Identity.Contracts\ --configuration Release -p:PackageVersion=$version -p:RepositoryUrl=https://github.com/$owner/play.identity -o ..\packages
