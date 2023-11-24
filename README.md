@@ -42,11 +42,6 @@ $namespace="identity"
 kubectl create namespace $namespace
 ```
 
-## Create the Kubernetes pod
-```powershell
-kubectl apply -f .\kubernetes\identity.yaml -n $namespace
-```
-
 To check the pods running
 ```powershell
 kubectl get pods -n $namespace
@@ -71,7 +66,7 @@ $AKS_OIDC_ISSUER=az aks show -n $appname -g $resourcegroup --query "oidcIssuerPr
 az identity federated-credential create --name $namespace --identity-name $namespace --resource-group $resourcegroup --issuer $AKS_OIDC_ISSUER --subject "system:serviceaccount:${namespace}:${namespace}-serviceaccount"
 ```
 
-## Create the Signing certificate
+## Install the helm chart
 ```powershell
-kubectl apply -f .\kubernetes\signing-cer.yaml -n $namespace
+helm install identity-service .\helm -f .\helm\values.yaml -n $namespace
 ```
