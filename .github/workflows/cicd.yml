@@ -33,6 +33,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: generate-version
 
+    permissions:
+      contents: read
+      packages: write
+
     steps:
     - uses: actions/checkout@v3
     
@@ -40,6 +44,9 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 7.0.x
+        source-url: https://nuget.pkg.github.com/${{github.repository_owner}}/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Pack
       run: | 
@@ -48,4 +55,7 @@ jobs:
         -p:PackageVersion=${{ needs.generate-version.outputs.new_version}} \
         -p:RepositoryUrl=https://github.com/${{github.repository_owner}}/play.identity \
         -o packages
+
+    - name: Publish
+      run: dotnet nuget push packages/*.nupkg
 
