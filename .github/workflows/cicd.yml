@@ -65,14 +65,22 @@ jobs:
     needs: generate-version
 
     env:
-      APP_NAME: waplayeconomy
+      APP_NAME: waplayeconomy      
 
     permissions:
+      id-token: write      
       contents: read
       packages: write
 
     steps:
     - uses: actions/checkout@v3
+
+    - name: Azure Login
+      uses: Azure/login@v1.5.0
+      with:     
+        client-id: ${{secrets.AZURE_CLIENT_ID}}
+        tenant-id: ${{secrets.AZURE_TENANT_ID}}
+        subscription-id: ${{secrets.AZURE_SUBSCRIPTION_ID}}  
 
     - name: Build and push Docker images
       uses: docker/build-push-action@v5.1.0
